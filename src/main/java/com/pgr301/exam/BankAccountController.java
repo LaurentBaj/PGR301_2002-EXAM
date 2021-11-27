@@ -2,7 +2,6 @@ package com.pgr301.exam;
 
 import com.pgr301.exam.model.Account;
 import com.pgr301.exam.model.Transaction;
-import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -10,14 +9,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import static java.math.BigDecimal.*;
 import static java.util.Optional.ofNullable;
 
 @RestController
 public class BankAccountController implements ApplicationListener<ApplicationReadyEvent> {
+
+//    private Map<String, Account> theBank = new HashMap();
+//
+//    @Autowired
+//    private MeterRegistry meterRegistry;
+//
+//    @Autowired
+//    public BankAccountController(MeterRegistry meterRegistry) {
+//        this.meterRegistry = meterRegistry;
+//    }
+
 
     @Autowired
     private BankingCoreSystmeService bankService;
@@ -41,6 +48,7 @@ public class BankAccountController implements ApplicationListener<ApplicationRea
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+        // Gauge.builder("account_count", theBank, b -> b.values().size()).register(meterRegistry);
     }
 
     @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "video not found")
