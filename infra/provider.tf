@@ -5,9 +5,9 @@ terraform {
       version = "3.56.0"
     }
   }
-#  backend "s3" {
-#    bucket = "pgr301-laba006-terraform"
-#    key    = "global/s3/terraform.tfstate"
-#    region = "eu-west-1"
-#  }
+  backend "s3" {
+    bucket = "pgr301-laba006-terraform"
+    key    = "laba006/terraform-in-pipeline.state"
+    region = "eu-west-1"
+  }
 }
