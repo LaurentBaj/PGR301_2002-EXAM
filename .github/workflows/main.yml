@@ -23,14 +23,13 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
-      - name: Login to aws
-          run: aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 244530008913.dkr.ecr.eu-north-1.amazonaws.com
+      # Build and push to ECR
       - name: Build image
-          run: docker build -t 2002 .
-      - name: Tag it
-          run: docker tag 2002:latest 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
+        run: docker build -t 2002
+      - name: Tag new build
+        run:  docker tag 2002:latest 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
       - name: Push to ECR
-          run: docker push 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
+        run: docker push 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
 
 ## https://learn.hashicorp.com/tutorials/terraform/github-actions
 ## INIT, APPLY and combine it  with Actions
