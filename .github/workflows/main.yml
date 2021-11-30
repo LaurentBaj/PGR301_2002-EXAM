@@ -25,6 +25,7 @@ jobs:
         run: docker build -t 2002 .
       - name: Tag new build
         run: docker tag 2002:latest 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
+# Crashes upon pushing - I tried using the secrets which I've saved in the repository
 #      - name: Push to ECR
 #        run: docker push 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
 
