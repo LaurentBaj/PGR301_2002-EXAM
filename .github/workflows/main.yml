@@ -24,8 +24,10 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       # Build and push to ECR
+      - name: Login to aws
+        run: aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 244530008913.dkr.ecr.eu-north-1.amazonaws.com
       - name: Build image
-        run: docker build -t 2002 . 
+        run: docker build -t 2002 .
       - name: Tag new build
         run:  docker tag 2002:latest 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
       - name: Push to ECR
