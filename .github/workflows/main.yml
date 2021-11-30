@@ -20,20 +20,18 @@ jobs:
       - name: Run tests
         run: mvn -B package --file pom.xml
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-
-      - run: docker build --tag my-image:v1 .
+      # Build and push to ECR
+      - name: Build image
+        run: docker build -t 2002 .
+      - name: Tag new build
+        run: docker tag 2002:latest 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
       - name: Push to ECR
-        id: ecr
-        uses: jwalton/gh-ecr-push@v1
-        with:
-          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: eu-west-1
-          image: my-image:v1
+        run: docker push 244530008913.dkr.ecr.eu-north-1.amazonaws.com/2002:latest
 
-## https://learn.hashicorp.com/tutorials/terraform/github-actions
+
+
+### Attempt at integrating Terraform
+# https://learn.hashicorp.com/tutorials/terraform/github-actions
 ## INIT, APPLY and combine it  with Actions
 #      - name: Terraform Init
 #        run: terraform init
