@@ -30,7 +30,7 @@ jobs:
         with:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          region: us-east-1
+          region: eu-west-1
           image: my-image:v1
 
 ## https://learn.hashicorp.com/tutorials/terraform/github-actions
